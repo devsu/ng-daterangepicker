@@ -64,6 +64,7 @@
           <span *ngIf="d.visible" class="day-num" [class.is-active]="d.from || d.to">{{ d.day }}</span>
         </div>
       </div>
+      <button (click)="filterByDate()" type="button" class="filter-button">Filter </button>
     </div>
     <div class="side-container">
       <div class="side-container-buttons">
