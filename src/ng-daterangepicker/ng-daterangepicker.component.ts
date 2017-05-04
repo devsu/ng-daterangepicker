@@ -69,6 +69,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
   }
 
   set value(value: string) {
+    console.log('value',value);
     if (!value) { return; }
     this.modelValue = value;
     this.onChangeCallback(value);
