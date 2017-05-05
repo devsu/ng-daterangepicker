@@ -72,7 +72,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
   set value(value: string) {
     if (!value) { return; }
     if(!this.modelValue) {
-      this.setToDefaultDate();
+      this.setToDefaultDate(false);
       return;
     }
     this.modelValue = value;
