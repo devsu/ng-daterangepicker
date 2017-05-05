@@ -18,22 +18,31 @@
   border-radius: 7px
   position: relative
 
-  .filter-button
+  .button-container
+    display: flex
+
+  .filter-button, .reset-button
     background: #009688
     border-radius: 15px
     border: 1px solid $blue
-    height: 30px
-    width: 138px
+    height: 22px
+    width: 75px
     display: block
     text-align: center
     outline: none
-    margin-bottom: 15px
     color: white
-    font-size: 13px
+    font-size: 12px
     cursor: pointer
     position: relative
-    left: 152px
-    bottom: 50px
+    left: 133px
+
+  .filter-button
+    bottom: 45px
+
+  .reset-button
+    bottom: 45px
+    margin-right: 5px
+
 
   &.is-active
     border: 1px solid $blue

@@ -39,6 +39,7 @@ export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
 })
 export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() options: NgDateRangePickerOptions;
+  @Input() defaultStartDate;
   @Output() triggerFilter = new EventEmitter<any>();
 
   modelValue: string;
@@ -62,27 +63,26 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
   private onTouchedCallback: () => void = () => { };
   private onChangeCallback: (_: any) => void = () => { };
 
-  constructor(private elementRef: ElementRef) {
-    console.log('que tal'); 
- } 
+  constructor(private elementRef: ElementRef) { }
 
   get value(): string {
     return this.modelValue;
   }
 
   set value(value: string) {
-    console.log(' set value',value);
     if (!value) { return; }
+    if(!this.modelValue) {
+      this.setToDefaultDate();
+      return;
+    }
     this.modelValue = value;
     this.onChangeCallback(value);
   }
 
   writeValue(value: string) {
-  console.log("write value", value);
     if (!value) { return; }
     this.modelValue = value;
   }
-
 
   filterByDate() {
     this.triggerFilter.emit();
@@ -166,6 +166,26 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
 
   closeCalendar(e: MouseEvent): void {
     this.opened = false;
+  }
+
+  setToDefaultDate(reset) {
+    this.dateTo = new Date(this.getTodayDate());
+    this.dateFrom = new Date(this.defaultStartDate);
+    this.modelValue =  this.getInitialRange(this.defaultStartDate);
+    this.generateCalendar();
+    if(reset) {
+      this.triggerFilter.emit();
+    }
+  }
+
+  getInitialRange(startDate) {
+    const endDate = this.getTodayDate();
+    return `${startDate}-${endDate}`
+  }
+
+  getTodayDate() {
+    const dateObject = new Date();
+    return `${dateObject.getMonth() + 1}/${dateObject.getDate()}/${dateObject.getFullYear()} `
   }
 
   selectDate(e: MouseEvent, index: number): void {
