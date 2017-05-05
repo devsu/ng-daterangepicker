@@ -62,20 +62,23 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
   private onTouchedCallback: () => void = () => { };
   private onChangeCallback: (_: any) => void = () => { };
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef) {
+    console.log('que tal'); 
+ } 
 
   get value(): string {
     return this.modelValue;
   }
 
   set value(value: string) {
-    console.log('value',value);
+    console.log(' set value',value);
     if (!value) { return; }
     this.modelValue = value;
     this.onChangeCallback(value);
   }
 
   writeValue(value: string) {
+  console.log("write value", value);
     if (!value) { return; }
     this.modelValue = value;
   }
