@@ -86,6 +86,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
 
   filterByDate() {
     this.triggerFilter.emit();
+    this.opened = false;
   }
 
   registerOnChange(fn: any) {
@@ -104,7 +105,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     this.selectRange(this.options.range);
   }
 
-  ngOnChanges(changes: {[propName: string]: SimpleChange}) {
+  ngOnChanges(changes: any) {
     this.options = this.options || this.defaultOptions;
   }
 
@@ -175,6 +176,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     this.generateCalendar();
     if(reset) {
       this.triggerFilter.emit();
+      this.opened = false;
     }
   }
 
@@ -203,7 +205,6 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
       this.dateTo = selectedDate;
       this.opened = 'from';
     }
-
     this.generateCalendar();
   }
 
